@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIÈRE | Ultra-Luxury Real Estate</title>
+    
+    <!-- Fonts: Playfair Display (Luxury Serif) & Montserrat (Modern Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg-deep: #050608;
+            --bg-panel: #0b0f15;
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+            --text-white: #ffffff;
+            --text-muted: #aab2bd;
+            --glass-bg: rgba(11, 15, 21, 0.7);
+            --glass-border: 1px solid rgba(212, 175, 55, 0.2);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --shadow-gold: 0 10px 30px -10px rgba(212, 175, 55, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--text-white); }
+        
+        a { text-decoration: none; transition: 0.3s; color: inherit; }
+        
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* =========================================
+           2. UTILITIES & UI COMPONENTS
+           ========================================= */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .btn-gold {
+            background: var(--gold-primary);
+            color: #000;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title span {
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Glass Card Effect */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* =========================================
+           3. NAVIGATION
+           ========================================= */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            transition: 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 6, 8, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 28px; font-weight: 700; font-family: var(--font-heading); letter-spacing: 2px; }
+        
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+        .nav-links a:hover { color: var(--gold-primary); }
+
+        /* =========================================
+           4. HERO SECTION (CINEMATIC)
+           ========================================= */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* High Res Night Pool Villa Shot */
+            background: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2671&auto=format&fit=crop') no-repeat center center/cover;
+            z-index: -1;
+            /* Parallax Effect handled by Fixed attachment */
+            background-attachment: fixed;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(5,6,8,0.8) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-btns { display: flex; justify-content: center; gap: 20px; }
+
+        /* =========================================
+           5. DEVICE MOCKUP SHOWCASE (3D)
+           ========================================= */
+        .mockup-section {
+            padding: 120px 0;
+            position: relative;
+            /* Background Image behind mockups */
+            background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+        
+        .mockup-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(5, 6, 8, 0.85); /* Heavy dark overlay */
+        }
+
+        .mockup-grid {
+            position: relative;
+            z-index: 5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .mockup-text h2 { font-size: 3rem; margin-bottom: 20px; }
+        .mockup-text p { color: var(--text-muted); margin-bottom: 30px; }
+
+        /* 3D Devices Container */
+        .devices-wrapper {
+            position: relative;
+            height: 500px;
+            perspective: 1500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Abstract CSS Representations of Devices */
+        .device {
+            position: absolute;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            overflow: hidden;
+            transition: transform 0.5s;
+        }
+
+        .device img { object-fit: cover; opacity: 0.9; }
+
+        /* Desktop */
+        .dev-desktop {
+            width: 500px; height: 320px;
+            z-index: 1;
+            transform: translateZ(0) rotateY(-10deg) translateX(-50px);
+            border-bottom: 20px solid #222; /* Stand base */
+        }
+
+        /* Tablet */
+        .dev-tablet {
+            width: 240px; height: 320px;
+            z-index: 2;
+            right: 50px;
+            transform: translateZ(50px) rotateY(-15deg);
+        }
+
+        /* Mobile */
+        .dev-mobile {
+            width: 120px; height: 240px;
+            z-index: 3;
+            bottom: 20px;
+            right: 180px;
+            border-radius: 20px;
+            border: 4px solid #111;
+            transform: translateZ(100px) rotateY(-5deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateZ(100px) rotateY(-5deg) translateY(0); }
+            50% { transform: translateZ(100px) rotateY(-5deg) translateY(-20px); }
+            100% { transform: translateZ(100px) rotateY(-5deg) translateY(0); }
+        }
+
+        /* =========================================
+           6. FEATURED VILLAS (3D CARDS)
+           ========================================= */
+        .properties-section {
+            padding: 100px 0;
+            background: var(--bg-deep);
+        }
+
+        .prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .prop-card {
+            height: 550px;
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .prop-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s; /* JS handles smoothness */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .prop-img-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        .prop-img-wrapper img {
+            transition: transform 0.8s;
+        }
+
+        /* Hover Effect */
+        .prop-card:hover .prop-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .prop-details {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(5, 6, 8, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-top: 2px solid var(--gold-primary);
+            transform: translateZ(30px); /* 3D Pop */
+            color: #fff;
+        }
+
+        .price { color: var(--gold-primary); font-size: 1.2rem; font-weight: 700; display: block; margin-bottom: 5px; }
+        .loc { font-size: 0.9rem; color: #ccc; text-transform: uppercase; letter-spacing: 1px; }
+        .specs { display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.85rem; color: #aaa; border-top: 1px solid #333; padding-top: 10px; }
+
+        /* =========================================
+           7. MODERN COLLECTION (GRID)
+           ========================================= */
+        .collection-section {
+            padding: 100px 0;
+            background: #080a0e;
+        }
+
+        .wide-card {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            margin-bottom: 60px;
+            background: var(--bg-panel);
+            border: 1px solid #222;
+        }
+
+        .wide-card.reverse { grid-template-columns: 1fr 1.5fr; }
+
+        .wide-img { height: 400px; overflow: hidden; position: relative; }
+        .wide-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        
+        .wide-content h3 { font-size: 2rem; margin-bottom: 15px; }
+        .wide-content ul { list-style: none; margin: 20px 0; }
+        .wide-content li { margin-bottom: 10px; color: var(--text-muted); }
+        .wide-content li i { color: var(--gold-primary); width: 25px; }
+
+        /* =========================================
+           8. FEATURES & STATS
+           ========================================= */
+        .features-bar {
+            padding: 80px 0;
+            background: var(--gold-primary);
+            color: #000;
+        }
+        
+        .feature-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .f-item { padding: 20px; }
+        .f-item i { font-size: 3rem; margin-bottom: 15px; color: #000; opacity: 0.8; }
+        .f-item h4 { color: #000; font-family: var(--font-body); font-weight: 700; text-transform: uppercase; }
+
+        /* =========================================
+           9. LEAD FORM & FOOTER
+           ========================================= */
+        .contact-section {
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2670&auto=format&fit=crop') center/cover fixed;
+            position: relative;
+        }
+
+        .contact-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .contact-box {
+            position: relative;
+            z-index: 5;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-family: var(--font-body);
+        }
+        .form-input:focus { outline: none; border-color: var(--gold-primary); }
+
+        footer {
+            background: #000;
+            padding: 50px 0;
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           ANIMATION UTILS
+           ========================================= */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .mockup-grid { grid-template-columns: 1fr; text-align: center; }
+            .devices-wrapper { transform: scale(0.8); }
+            .hero h1 { font-size: 3rem; }
+            .wide-card, .wide-card.reverse { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-btns { flex-direction: column; }
+            .dev-desktop { display: none; } /* Hide heavy graphic on mobile */
+            .dev-tablet { right: auto; transform: none; }
+            .dev-mobile { right: -20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">AURUM <span style="color:var(--gold-primary);">ESTATE</span></div>
+            <div class="nav-links">
+                <a href="#">Residences</a>
+                <a href="#">The Collection</a>
+                <a href="#">About</a>
+                <a href="#">Journal</a>
+            </div>
+            <a href="#contact" class="btn btn-outline" style="padding: 10px 25px; font-size: 12px;">Contact VIP</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p style="letter-spacing: 3px; color: var(--gold-primary);">DUBAI • BEVERLY HILLS • MONACO</p>
+            <h1>Find Your Perfect <br><span class="gold-text">Luxury Property</span></h1>
+            <p>Premium villas & modern architectural masterpieces designed for elite living.</p>
+            <div class="hero-btns">
+                <a href="#properties" class="btn btn-gold">View Properties</a>
+                <a href="#contact" class="btn btn-outline">Get Consultation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOCKUP SHOWCASE -->
+    <section class="mockup-section">
+        <div class="mockup-overlay"></div>
+        <div class="container">
+            <div class="mockup-grid">
+                <div class="mockup-text">
+                    <span>DIGITAL EXPERIENCE</span>
+                    <h2>World Class <br><span class="gold-text">Virtual Tours</span></h2>
+                    <p>Experience your future home before you step foot in it. Our immersive digital platform offers 8K rendering and seamless navigation across all devices.</p>
+                    <ul style="list-style: none; margin-bottom: 30px;">
+                        <li style="margin-bottom:10px;"><i class="fa-solid fa-check" style="color:var(--gold-primary); margin-right:10px;"></i> 360° Panorama Views</li>
+                        <li style="margin-bottom:10px;"><i class="fa-solid fa-check" style="color:var(--gold-primary); margin-right:10px;"></i> Live Video Walkthroughs</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--gold-primary); margin-right:10px;"></i> Instant Floor Plan Access</li>
+                    </ul>
+                </div>
+
+                <!-- CSS 3D Device Composition -->
+                <div class="devices-wrapper">
+                    <!-- Desktop -->
+                    <div class="device dev-desktop">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2670&auto=format&fit=crop" alt="Desktop View">
+                    </div>
+                    <!-- Tablet -->
+                    <div class="device dev-tablet">
+                        <img src="https://images.unsplash.com/photo-1600596542815-2a4d9f6facb8?q=80&w=2669&auto=format&fit=crop" alt="Tablet View">
+                    </div>
+                    <!-- Mobile -->
+                    <div class="device dev-mobile">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop" alt="Mobile View">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROPERTIES -->
+    <section id="properties" class="properties-section">
+        <div class="container">
+            <div class="section-title">
+                <span>Exclusive Listings</span>
+                <h2>Featured Villas</h2>
+            </div>
+
+            <div class="prop-grid">
+                <!-- Card 1 -->
+                <div class="prop-card js-tilt">
+                    <div class="prop-inner">
+                        <div class="prop-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1600596542815-2a4d9f6facb8?q=80&w=2669&auto=format&fit=crop" alt="Villa Night">
+                        </div>
+                        <div class="prop-details glass-card">
+                            <span class="price">$14,500,000</span>
+                            <h3>The Onyx Mansion</h3>
+                            <span class="loc">Beverly Hills, CA</span>
+                            <div class="specs">
+                                <span><i class="fa-solid fa-bed"></i> 6 Beds</span>
+                                <span><i class="fa-solid fa-bath"></i> 8 Baths</span>
+                                <span><i class="fa-solid fa-ruler-combined"></i> 12,000 Sq.Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="prop-card js-tilt">
+                    <div class="prop-inner">
+                        <div class="prop-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=2080&auto=format&fit=crop" alt="Modern House">
+                        </div>
+                        <div class="prop-details glass-card">
+                            <span class="price">$8,250,000</span>
+                            <h3>Palm Jumeirah Villa</h3>
+                            <span class="loc">Dubai, UAE</span>
+                            <div class="specs">
+                                <span><i class="fa-solid fa-bed"></i> 5 Beds</span>
+                                <span><i class="fa-solid fa-bath"></i> 6 Baths</span>
+                                <span><i class="fa-solid fa-water"></i> Private Beach</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="prop-card js-tilt">
+                    <div class="prop-inner">
+                        <div class="prop-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop" alt="Glass House">
+                        </div>
+                        <div class="prop-details glass-card">
+                            <span class="price">$11,000,000</span>
+                            <h3>Modern Glass Retreat</h3>
+                            <span class="loc">Malibu, CA</span>
+                            <div class="specs">
+                                <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
+                                <span><i class="fa-solid fa-bath"></i> 5 Baths</span>
+                                <span><i class="fa-solid fa-infinity"></i> Infinity Pool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODERN COLLECTION -->
+    <section class="collection-section">
+        <div class="container">
+            <div class="section-title">
+                <span>Architectural Marvels</span>
+                <h2>Modern Collection</h2>
+            </div>
+
+            <!-- Item 1 -->
+            <div class="wide-card">
+                <div class="wide-img">
+                    <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2584&auto=format&fit=crop" alt="Interior">
+                </div>
+                <div class="wide-content">
+                    <h3>The Sky Penthouse</h3>
+                    <p>Situated atop the city's highest tower, this penthouse offers 360-degree views and private elevator access.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i> Smart Home Automation</li>
+                        <li><i class="fa-solid fa-star"></i> Heated Indoor Pool</li>
+                        <li><i class="fa-solid fa-star"></i> Private Cinema</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="wide-card reverse">
+                <div class="wide-content">
+                    <h3>Oceanfront Sanctuary</h3>
+                    <p>A masterpiece of glass and steel where the ocean meets modern architecture. Minimalist design with maximum impact.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i> Direct Beach Access</li>
+                        <li><i class="fa-solid fa-star"></i> 5-Car Garage</li>
+                        <li><i class="fa-solid fa-star"></i> Guest House Included</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                <div class="wide-img">
+                    <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?q=80&w=2670&auto=format&fit=crop" alt="Exterior">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURES STRIP -->
+    <section class="features-bar">
+        <div class="container feature-grid">
+            <div class="f-item">
+                <i class="fa-solid fa-user-tie"></i>
+                <h4>Expert Agents</h4>
+            </div>
+            <div class="f-item">
+                <i class="fa-solid fa-bolt"></i>
+                <h4>Fast Processing</h4>
+            </div>
+            <div class="f-item">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <h4>Mobile First</h4>
+            </div>
+            <div class="f-item">
+                <i class="fa-solid fa-globe"></i>
+                <h4>Global Reach</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / LEAD GEN -->
+    <section id="contact" class="contact-section">
+        <div class="contact-overlay"></div>
+        <div class="container">
+            <div class="contact-box glass-card">
+                <h5 class="gold-text">PRIVATE CONSULTATION</h5>
+                <h2 style="margin-bottom:20px;">Request a Viewing</h2>
+                <p style="margin-bottom:30px; color:#ddd;">Leave your details below. Our senior property consultant will contact you via WhatsApp or Phone within 1 hour.</p>
+                
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-input" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-input" style="color:#aaa;">
+                            <option>Interested in...</option>
+                            <option>Buying a Villa</option>
+                            <option>Selling Property</option>
+                            <option>Investment</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-gold" style="width:100%;">Schedule Call</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3 class="logo" style="margin-bottom:20px; color:#fff;">AURUM ESTATE</h3>
+            <div style="margin-bottom:20px;">
+                <a href="#" style="margin:0 10px;">Properties</a>
+                <a href="#" style="margin:0 10px;">Services</a>
+                <a href="#" style="margin:0 10px;">Privacy Policy</a>
+            </div>
+            <p>&copy; 2026 Aurum Luxury Real Estate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR 3D EFFECTS & SCROLL -->
+    <script>
+        // 1. Sticky Navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 2. 3D Tilt Effect Calculation for Property Cards
+        const cards = document.querySelectorAll('.js-tilt');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate percentage from center
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Limit rotation to 10 degrees
+                const rotateX = ((y - centerY) / centerY) * -5; 
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                const inner = card.querySelector('.prop-inner');
+                inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                const inner = card.querySelector('.prop-inner');
+                inner.style.transform = `rotateX(0) rotateY(0) scale(1)`;
+            });
+        });
+
+        // 3. Simple Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Add reveal classes to sections
+        document.querySelectorAll('section').forEach(section => {
+            // Initial state done in CSS could be better, but doing inline for simplicity
+            // section.style.opacity = 0;
+            // section.style.transform = 'translateY(50px)';
+            // section.style.transition = 'all 0.8s ease';
+            // observer.observe(section);
+        });
+    </script>
+</body>
+</html>
